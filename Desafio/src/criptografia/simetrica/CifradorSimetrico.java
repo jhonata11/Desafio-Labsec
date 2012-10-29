@@ -52,13 +52,14 @@ public abstract class CifradorSimetrico {
      */
 	public void escreverChave(SecretKey chave, String caminhoChave) {
 		
-		File outFile = new File(caminhoChave + "/chave.txt");
+		File arquivoSaida = new File(caminhoChave + "/chave.txt");
 		byte[] chaveEmBytes = transformaChaveEmBytes(chave);
 		
 		try {
-			OutputStream out = new FileOutputStream(outFile);
-			out.write(chaveEmBytes);
-			out.close();
+			arquivoSaida.createNewFile();
+			OutputStream escritor = new FileOutputStream(arquivoSaida);
+			escritor.write(chaveEmBytes);
+			escritor.close();
 		} catch (FileNotFoundException e) {
 
 			e.printStackTrace();
@@ -103,8 +104,18 @@ public abstract class CifradorSimetrico {
      * @return {@link SecretKey}
      */
 	public SecretKey lerChave(File arquivo) {
-	    
 		
+		FileInputStream leitor = null;
+	    
+	    
+	    try {
+	    	leitor =  new FileInputStream(arquivo);
+	    	
+	    } catch (IOException e){
+	    	
+	    }
+	    
+	    
 	    return null;
 	}
 }
