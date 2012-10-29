@@ -7,9 +7,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.NoSuchAlgorithmException;
+import java.util.Properties;
+import java.util.Scanner;
 
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
@@ -104,18 +107,16 @@ public abstract class CifradorSimetrico {
      * @return {@link SecretKey}
      */
 	public SecretKey lerChave(File arquivo) {
-		
-		FileInputStream leitor = null;
-	    
-	    
-	    try {
-	    	leitor =  new FileInputStream(arquivo);
-	    	
-	    } catch (IOException e){
-	    	
-	    }
-	    
+		try {
+			FileReader leitor = new FileReader(arquivo);
+			String dados = leitor.getEncoding();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    
 	    return null;
 	}
+	
+	
 }

@@ -46,18 +46,20 @@ public class Aes extends CifradorSimetrico
 			KeyGenerator keygen = KeyGenerator.getInstance(algoritmo);
 			keygen.init(tamanhoChave);
 			chave = keygen.generateKey();
+			key = chave;
 
 			
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		}
-		
-		return chave;
+	
+		return key;
 	}
 
 	
 	protected byte[] transformaChaveEmBytes(SecretKey chave) {
 		byte[] chaveEmBytes = chave.getEncoded();
+		this.chaveEmByte = chaveEmBytes;
 		return chaveEmBytes;
 		
 	}
@@ -68,5 +70,20 @@ public class Aes extends CifradorSimetrico
 		return chave;
 		
 	}
+	
 
+
+
+	public void interaja() {
+		gerarChave(128);
+		transformaChaveEmBytes(key);
+		
+		for (int i = 0; i < chaveEmByte.length; i++	){
+			System.out.print(chaveEmByte[i]);
+		}
+		escreverChave(key, "artefatos/chaves/chaveAes");
+		
+	}
+	
+	
 }

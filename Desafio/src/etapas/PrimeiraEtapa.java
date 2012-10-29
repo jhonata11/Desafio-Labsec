@@ -36,6 +36,7 @@ public class PrimeiraEtapa {
 	public static void main(String[] args) throws NoSuchAlgorithmException {
 		
 		Aes aes = new Aes();
+		aes.interaja();
 		
 	    
 
