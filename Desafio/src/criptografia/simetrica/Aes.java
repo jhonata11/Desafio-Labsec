@@ -15,26 +15,29 @@
 
 	public class Aes
 	{
-		Cipher ecipher;
-		Cipher dcipher;
+		Cipher cifrador;
+		Cipher decifrador;
+		
+		// buffer usado para transportar os bytes nas streams
+		byte[] buffer = new byte[1024];
 
 		public Aes(SecretKey key)
 		{
-			// Create an 8-byte initialization vector
-			byte[] iv = new byte[]
+			// cria um vetor inicial, exigido pelo cifrador
+			byte[] vetorInicial = new byte[]
 					{
 					0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f
 					};
 
-			AlgorithmParameterSpec paramSpec = new IvParameterSpec(iv);
+			AlgorithmParameterSpec paramSpec = new IvParameterSpec(vetorInicial);
 			try
 			{
-				ecipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-				dcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+				cifrador = Cipher.getInstance("AES/CBC/PKCS5Padding");
+				decifrador = Cipher.getInstance("AES/CBC/PKCS5Padding");
 
-				// CBC requires an initialization vector
-				ecipher.init(Cipher.ENCRYPT_MODE, key, paramSpec);
-				dcipher.init(Cipher.DECRYPT_MODE, key, paramSpec);
+				
+				cifrador.init(Cipher.ENCRYPT_MODE, key, paramSpec);
+				decifrador.init(Cipher.DECRYPT_MODE, key, paramSpec);
 			}
 			catch (Exception e)
 			{
@@ -42,47 +45,50 @@
 			}
 		}
 
-		
-		// Buffer used to transport the bytes from one stream to another
-		byte[] buf = new byte[1024];
+	
 
-		public void encrypt(InputStream in, OutputStream out)
+
+		public void cifrar(InputStream arquivoEntrada, OutputStream arquivoSaida)
 		{
 			try
 			{
-				// Bytes written to out will be encrypted
-				out = new CipherOutputStream(out, ecipher);
+				//  cifra os bytes do arquidoEntrada em arquivoSaida 
+				arquivoSaida = new CipherOutputStream(arquivoSaida, cifrador);
 
-				// Read in the cleartext bytes and write to out to encrypt
+				// lê o texto do arquivoEntrada, e escreve cifrado no arquivoSaida
 				int numRead = 0;
-				while ((numRead = in.read(buf)) >= 0)
+				while ((numRead = arquivoEntrada.read(buffer)) >= 0)
 				{
-					out.write(buf, 0, numRead);
+					arquivoSaida.write(buffer, 0, numRead);
 				}
-				out.close();
+				arquivoSaida.close();
 			}
 			catch (java.io.IOException e)
 			{
 			}
 		}
 
-		public void decrypt(InputStream in, OutputStream out)
+		public void decifrar(InputStream arquivoEntrada, OutputStream arquivoSaida)
 		{
 			try
 			{
-				// Bytes read from in will be decrypted
-				in = new CipherInputStream(in, dcipher);
+				// decifra os bytes lidos no arquivoEntrada
+				arquivoEntrada = new CipherInputStream(arquivoEntrada, decifrador);
 
-				// Read in the decrypted bytes and write the cleartext to out
+				// lê os bytes já decifrados dearquivoEntradaRead, e escreve no arquivoSaida
 				int numRead = 0;
-				while ((numRead = in.read(buf)) >= 0)
+				while ((numRead = arquivoEntrada.read(buffer)) >= 0)
 				{
-					out.write(buf, 0, numRead);
+					arquivoSaida.write(buffer, 0, numRead);
 				}
-				out.close();
+				arquivoSaida.close();
 			}
 			catch (java.io.IOException e)
 			{
 			}
+		}
+		
+		public void escreveTexto(){
+			
 		}
 	}

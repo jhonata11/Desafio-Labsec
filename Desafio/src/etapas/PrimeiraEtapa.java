@@ -40,7 +40,6 @@ public class PrimeiraEtapa {
 		try
 		{
 			// Generate a temporary key. In practice, you would save this key.
-			// See also e464 Encrypting with DES Using a Pass Phrase.
 
 			KeyGenerator kgen = KeyGenerator.getInstance("AES");
 			kgen.init(128);
