@@ -1,11 +1,13 @@
 package etapas;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.security.NoSuchAlgorithmException;
 
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
-import criptografia.simetrica.CifradorSimetrico;
-import criptografia.simetrica.algoritmos.Aes;
+import criptografia.simetrica.Aes;
 
 
 
@@ -35,9 +37,28 @@ public class PrimeiraEtapa {
 	
 	public static void main(String[] args) throws NoSuchAlgorithmException {
 		
-		Aes aes = new Aes();
-		aes.interaja();
-		
+		try
+		{
+			// Generate a temporary key. In practice, you would save this key.
+			// See also e464 Encrypting with DES Using a Pass Phrase.
+
+			KeyGenerator kgen = KeyGenerator.getInstance("AES");
+			kgen.init(128);
+			SecretKey key = kgen.generateKey();
+
+			// Create encrypter/decrypter class
+			
+			Aes encrypter = new Aes(key); 
+
+			// Encrypt
+			encrypter.encrypt(new FileInputStream("artefatos/textos/textoPlano.txt"),new FileOutputStream("artefatos/textosCifrados/textoCifrado.txt"));
+			// Decrypt
+			encrypter.decrypt(new FileInputStream("artefatos/textosCifrados/textoCifrado.txt"),new FileOutputStream("artefatos/textosDecifrados/textoDecifrado.txt"));
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	    
 
 	}
