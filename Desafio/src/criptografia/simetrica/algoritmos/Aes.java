@@ -75,6 +75,8 @@ public class Aes extends CifradorSimetrico
 
 
 	public void interaja() {
+		//classe criada para testar o progresso
+		
 		gerarChave(128);
 		transformaChaveEmBytes(key);
 		
