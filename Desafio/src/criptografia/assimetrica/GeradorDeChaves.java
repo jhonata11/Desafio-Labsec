@@ -1,6 +1,9 @@
 package criptografia.assimetrica;
 
 import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
@@ -21,14 +24,24 @@ public class GeradorDeChaves {
      * @param algoritmo - algoritmo de criptografia assimetrica a ser usado
      */
 	public GeradorDeChaves(String algoritmo) {
-	    
-		// TODO: Implementar.
+		this.algoritmo = algoritmo;
+
 	}
 	
 	public KeyPair gerarParDeChaves(int tamanhoDaChave) {
-	 
-	    // TODO: Implementar.
-	    return null;
+	     try {
+	 		KeyPairGenerator generator = KeyPairGenerator.getInstance(algoritmo);
+			generator.initialize(tamanhoDaChave);
+			return generator.generateKeyPair();
+		
+	     } catch (NoSuchAlgorithmException e) {
+
+	    	 System.out.println("houve um problema na geração do par de chaves");
+	    	 
+	    	 e.printStackTrace();
+			return null;
+		}
+		
 	}
 
 	/**
@@ -40,8 +53,8 @@ public class GeradorDeChaves {
 	 */
 	public PublicKey pegarChavePublica(KeyPair parDeChaves) 	{
 	 
-	    // TODO: Implementar.
-        return null;
+		
+        return parDeChaves.getPublic();
 	}
 
 	/**
@@ -53,7 +66,6 @@ public class GeradorDeChaves {
 	 */
 	public PrivateKey pegarChavePrivada(KeyPair parDeChaves) {
 	    
-	    // TODO: Implementar.
-        return null;
+        return parDeChaves.getPrivate();
 	}
 }

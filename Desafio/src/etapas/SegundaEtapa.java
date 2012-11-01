@@ -6,26 +6,19 @@ import java.io.FileOutputStream;
 import criptografia.simetrica.algoritmos.Aes;
 import criptografia.simetrica.algoritmos.TripleDes;
 
-
 /**
- * <B>Segunda Etapa - Cifrar/Decifrar um texto.</B> <p>
+ * segunda etapa - encriptação de um texto
  * 
- * Nessa etapa deve-se usar as chaves previamente geradas e armazenadas para cifrar um documento. 
- * Note que o documento deve ser o arquivo <b>textoPlano.txt</b>, que esta na pasta <b>artefatos/textos</b>. 
- * Para verificar se o processo esta correto, entao, deve-se decifrar o texto resultante, e assim, comparar com o texto inicial. <p>
+ * @author Jhonata da Rocha
  * 
- * Os pontos a serem verificados para essa etapa ser considerada concluida, sao os seguintes: <p>
- * 
- * - Cifrar um texto usando AES e decifra-lo para comparar os resultados. Essa comparacao de textos devera ser feita no codigo; <br>
- * - Cifrar o mesmo texto usado no item anterior, mas usando o Triple-DES, e decifra-lo para comparar os resultados. Essa comparacao de textos devera ser feita no codigo; <br>
+ * Esta segunda etapa é capaz de
+ *  
+ * - Cifrar um texto usando AES e decifra-lo para comparar os resultados. 
+ * - Cifrar o mesmo texto usado no item anterior, mas usando o Triple-DES, e decifra-lo para comparar os resultados. 
  * - Salvar em disco os textos cifrados e decifrados resultantes de cada algoritmo. <p>
- * 
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *<br>
- * Todas as variaveis globais definidas nessa classe devem 				    <br>
- * ser usadas. Elas definem os locais para escrever os 						<br>
- * resultados obtidos. 														<br>
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *<br>
+ *
  */
+
 public class SegundaEtapa {
 
 	//	TODO: IMPORTANTE -- esse arquivo deve conter seu nome e sua matricula

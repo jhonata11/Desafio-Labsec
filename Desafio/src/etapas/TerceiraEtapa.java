@@ -3,6 +3,7 @@ package etapas;
 import criptografia.resumo.Sha1;
 
 /**
+ * terceira etapa - resumo criptográfico
  * 
  * @author Jhonata da Rocha
  * 
