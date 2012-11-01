@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 
 import criptografia.simetrica.algoritmos.Aes;
 import criptografia.simetrica.algoritmos.TripleDes;
+import criptografia.simetrica.comparador.ComparadorDeTextos;
 
 /**
  * segunda etapa - encriptação de um texto
@@ -41,12 +42,19 @@ public class SegundaEtapa {
 		// TODO: implementar a segunda etapa - parte do AES.
 
 		Aes aes = new Aes();
+		ComparadorDeTextos comparador = new ComparadorDeTextos();
+		
 		try {
 			aes.cifrar(aes.lerChave(new File(caminhoChaveAes)), new File(caminhoTextoPlano),
 					new FileOutputStream(caminhoTextoCifradoAes + ".txt"));
 			
 			aes.decifrar(aes.lerChave(new File(caminhoChaveAes)), new File(caminhoTextoCifradoAes + ".txt"), 
 					new FileOutputStream(caminhoTextoDecifradoAes + ".txt"));
+			
+			
+			System.out.print("Comparação de textos AES: ");
+			comparador.comparaArquivos(caminhoTextoPlano, caminhoTextoDecifradoAes+".txt");
+			
 
 
 		} catch (Exception e) {
@@ -58,9 +66,10 @@ public class SegundaEtapa {
 	}
 
 	private static void segundaEtapaTripleDes() {
-		// TODO: implementar a segunda etapa - parte do Triple-DES.
 		
 		TripleDes tripledes = new TripleDes();
+		ComparadorDeTextos comparador = new ComparadorDeTextos();
+
 		
 		try {
 			tripledes.cifrar(tripledes.lerChave(new File(caminhoChaveTripleDes)), new File(caminhoTextoPlano),
@@ -70,6 +79,11 @@ public class SegundaEtapa {
 					new FileOutputStream(caminhoTextoDecifradoTripleDes + ".txt"));
 
 
+			System.out.print("Comparação de textos Triple-DES: ");
+			comparador.comparaArquivos(caminhoTextoPlano, caminhoTextoDecifradoTripleDes+".txt");
+
+
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

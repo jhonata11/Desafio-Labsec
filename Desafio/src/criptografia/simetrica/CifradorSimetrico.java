@@ -213,9 +213,5 @@ public abstract class CifradorSimetrico {
 
 
 		return buffer.toByteArray();
-
-
-
-
 	}
 }
